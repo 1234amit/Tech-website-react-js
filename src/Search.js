@@ -3,7 +3,7 @@ import { useGlobalContext } from './Context'
 
 const Search = () => {
 
-    const{ query } = useGlobalContext()
+    const{ query, searchPost } = useGlobalContext()
 
   return (
     <>
@@ -14,6 +14,7 @@ const Search = () => {
                 type="text"
                 placeholder="search here"
                 value={query}
+                onChange={(e)=> searchPost(e.target.value)}
                 // onChange={(e) => searchPost(e.target.value)}
                 />
             </div>
