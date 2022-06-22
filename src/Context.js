@@ -9,7 +9,7 @@ let API = "http://hn.algolia.com/api/v1/search?";
 
 const initialState = {
     isLoading: true,
-    query:"CSS",
+    query:"",
     nbPages: 0,
     page: 0,
     hits:[]
@@ -63,13 +63,27 @@ const AppProvider = ({children}) => {
         })
     }
 
+    // pagination
+
+    const getPrevPage = () =>{
+        dispatch({
+            type: "PREV_PAGE",
+        })
+    }
+
+    const getNextPage = () =>{
+        dispatch({
+            type: "NEXT_PAGE",
+        })
+    }
+
     useEffect(() => {
         fetchApiData(`${API}query=${state.query}&page=${state.page}`)
     }, [state.query, state.page])
 
     return(
         
-        <AppContext.Provider value={{ ...state, removePost,  searchPost}}>
+        <AppContext.Provider value={{ ...state, removePost,  searchPost, getPrevPage, getNextPage}}>
             {children}
         </AppContext.Provider>
     );
